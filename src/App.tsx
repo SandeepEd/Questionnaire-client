@@ -1,5 +1,5 @@
-import LogIn from "./components/LogIn";
-import Quiz from "./components/Quiz";
+import LogIn from './components/LogIn';
+import Quiz from './components/Quiz';
 
 export default function App() {
   return (
@@ -8,5 +8,5 @@ export default function App() {
       <Quiz />
     </>
 
-  )
+  );
 }
