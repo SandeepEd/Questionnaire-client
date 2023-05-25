@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext .js,.ts,.jsx,.tsx",
+    "lint:fix": "npm run lint -- --fix",
     "preview": "vite preview",
     "prepare": "husky install"
   },
