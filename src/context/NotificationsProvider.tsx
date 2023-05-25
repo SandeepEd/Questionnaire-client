@@ -34,7 +34,7 @@ export const NotificationsProvider: React.FC<{ children: JSX.Element }> = ({ chi
     }
   }, [ notifications ]);
 
-  console.log(`notifications :::`, notifications);
+  //   console.log(`notifications :::`, notifications);
 
   return <>
     <NotificationContext.Provider value={{ createNotification, clearNotifications }}>

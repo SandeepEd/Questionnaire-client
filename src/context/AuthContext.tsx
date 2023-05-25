@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       setIsLoading(true);
       const user = await login(creds);
-      console.log(`data :::`, user);
+      //   console.log(`data :::`, user);
       if (user) {
         setUser(user);
       }
