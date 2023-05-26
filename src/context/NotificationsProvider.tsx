@@ -1,4 +1,3 @@
-// import { Alert, Snackbar } from "@mui/material";
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface NotificationProps {
