@@ -19,7 +19,7 @@ const Question: React.FC<Props> = ({ question, options, callback }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+    <div className="bg-white h-full rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
       <h1 className="font-bold text-2xl mb-6">{question}</h1>
       <form onSubmit={handleSubmit}>
         {options.map((option, index) =>
