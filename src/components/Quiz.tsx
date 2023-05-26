@@ -1,5 +1,6 @@
 // import React from 'react'
 
+import { QuizProvider } from '../context/QuizProviders';
 import Question from './Question';
 
 const questions = [
@@ -42,11 +43,13 @@ const questions = [
 ];
 function Quiz() {
   return (
-    <Question
-      question={questions[0].question}
-      options={questions[0].options}
-      callback={() => { }}
-    />
+    <QuizProvider>
+      <Question
+        question={questions[0].question}
+        options={questions[0].options}
+        callback={() => { }}
+      />
+    </QuizProvider>
   );
 }
 
