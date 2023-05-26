@@ -1,7 +1,12 @@
-import client from 'utils/http';
+import { AxiosResponse } from 'axios';
+import { QueryObserverResult, useQuery } from 'react-query';
+import { IQuestions } from '../types/questionnaire';
+import client from '../utils/http';
+
+client.defaults.baseURL += `/questionnaire`;
 
 export class QuestionService {
-  static getQuestions() {
+  static getQuestions(): Promise<AxiosResponse<IQuestions>> {
     return client.get(`/questions`);
   }
 
@@ -21,3 +26,8 @@ export class QuestionService {
     return client.post(`/questions/${questionId}/options`, { option });
   }
 }
+
+export const useGetQuestions = (): QueryObserverResult<any> => useQuery({
+  queryKey: `questions`,
+  queryFn: () => QuestionService.getQuestions().then((res) => res.data),
+});
