@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserService } from '../services/UserService';
 import { getSession, login } from '../services/AuthService';
 import FullScreenLoading from '../components/FullScreenLoading';
-// import { AuthService } from "../services/AuthService";
 import { IUser } from '../types/user';
 import { useNotification } from './NotificationsProvider';
 
@@ -22,14 +22,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getUserFromSession = () => {
+    const getUserFromSession = async () => {
       const sessionPresent = getSession();
       if (!sessionPresent) {
         return null;
       }
-      // const user = (await UserService.getUser()).data;
-      // setUser(user)
+      const user = (await UserService.getUser()).data;
+      setUser(user);
     };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getUserFromSession();
   }, []);
 
@@ -37,7 +38,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       setIsLoading(true);
       const user = await login(creds);
-      //   console.log(`data :::`, user);
       if (user) {
         setUser(user);
       }
@@ -50,11 +50,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         type: `error`
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logout = useCallback(() => {
     setUser(undefined);
     navigate(`/login`);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
