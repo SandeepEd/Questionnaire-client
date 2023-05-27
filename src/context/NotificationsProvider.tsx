@@ -33,14 +33,12 @@ export const NotificationsProvider: React.FC<{ children: JSX.Element }> = ({ chi
     }
   }, [ notifications ]);
 
-  //   console.log(`notifications :::`, notifications);
-
   return <>
     <NotificationContext.Provider value={{ createNotification, clearNotifications }}>
       {children}
       {notifications.map((notification, i) =>
         <div key={i} className={`fixed flex flex-row items-center justify-between 
-                    top-0 left-0 m-4 ${notification.type === `error` ? `bg-red-500 
+                    top-0 right-0 m-4 ${notification.type === `error` ? `bg-red-500 
                     text-white` : `bg-green-300`}  px-3 py-2 rounded`}>
           <div className="pr-4">
             {notification.message}

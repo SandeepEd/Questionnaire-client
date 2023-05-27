@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import Loading from '../components/Loading';
-import { useGetQuestions } from '../services/QuestionService';
+import { useGetQuestions } from '../services/AssignmentService';
 import { IQuestion } from '../types/questionnaire';
 
 interface IQuizContext {

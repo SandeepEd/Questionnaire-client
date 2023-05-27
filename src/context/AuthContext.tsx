@@ -30,8 +30,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const user = (await UserService.getUser()).data;
       setUser(user);
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getUserFromSession();
+    void getUserFromSession();
   }, []);
 
   const logIn = useCallback(async (creds: IUser) => {
