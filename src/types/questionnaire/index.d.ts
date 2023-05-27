@@ -3,8 +3,14 @@ export interface IUser {
   name: string;
 }
 
-export interface IQuestions {
+export interface IQuestion {
   id: number;
-  question: string;
-  options: string[];
+  question_text: string;
+  response_id: number | null;
+  options: IOption[];
+}
+
+export interface IOption {
+  id: number;
+  option_text: string;
 }

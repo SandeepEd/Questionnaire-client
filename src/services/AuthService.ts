@@ -1,7 +1,6 @@
 import cookie from 'cookie';
 import client from '../utils/http';
 import { IUser } from '../types/user';
-
 export class AuthService {
   static login(data: IUser) {
     return client.post(`/login`, data);

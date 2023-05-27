@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from 'react';
 import Loading from '../components/Loading';
 import { useGetQuestions } from '../services/QuestionService';
-import { IQuestions } from '../types/questionnaire';
+import { IQuestion } from '../types/questionnaire';
 
 interface IQuizContext {
-  questions: IQuestions[] | undefined;
+  questions: IQuestion[] | undefined;
   currentQuestionIndex: number;
   goToNextQuestion: () => void;
   goToPreviousQuestion: () => void;
