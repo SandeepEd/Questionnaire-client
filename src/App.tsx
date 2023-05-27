@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { QuizProvider } from './context/QuizProviders';
 import FullScreenLoading from './components/FullScreenLoading';
 import { useAuth } from './context/AuthContext';
 
@@ -11,7 +12,11 @@ export default function App() {
   return (
     <>
       <Suspense fallback={<FullScreenLoading />}>
-        { user ? <QuizComponent /> : <LogInComponent />}
+        { user ?
+          <QuizProvider>
+            <QuizComponent />
+          </QuizProvider> :
+          <LogInComponent />}
       </Suspense>
     </>
 
