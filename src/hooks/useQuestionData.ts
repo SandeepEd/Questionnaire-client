@@ -38,6 +38,7 @@ export const useQuestionData = (question: IQuestion) => {
         type: `success`
       });
       !isLastQuestion && goToNextQuestion();
+      isLastQuestion && window.location.reload();
     } catch (e: any) {
       createNotification({
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
