@@ -2,6 +2,7 @@ import { useAuth } from '../context/AuthContext';
 import { useQuiz } from '../context/QuizProviders';
 import Pagination from './Pagination';
 import Question from './Question';
+import Summary from './Summary';
 
 function Quiz() {
   const { questions, currentQuestionIndex, goToQuestion } = useQuiz();
@@ -18,17 +19,23 @@ function Quiz() {
 
   return (
     <>
-      <Question
-        question={question}
-        callback={() => { }}
-        button_text={currentQuestionIndex === questions.length - 1 ? `Submit` :
-          user?.assignment_submitted ? `Next` : `Save Answer and Continue`}
-      />
-      <Pagination
-        totalCount={questions?.length || 0}
-        currentPage={currentQuestionIndex}
-        handlePageChange={handleQuestionChange}
-      />
+      {user?.assignment_submitted ?
+        <Summary />
+        :
+        <>
+          <Question
+            question={question}
+            callback={() => { }}
+            button_text={currentQuestionIndex === questions.length - 1 ? `Submit` :
+              user?.assignment_submitted ? `Next` : `Save Answer and Continue`}
+          />
+          <Pagination
+            totalCount={questions?.length || 0}
+            currentPage={currentQuestionIndex}
+            handlePageChange={handleQuestionChange}
+          />
+        </>
+      }
     </>
   );
 }
