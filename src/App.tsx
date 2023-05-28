@@ -16,7 +16,6 @@ const routes = [{
 export default function App() {
 
   const { user } = useAuth();
-  console.log(`user from App`, user);
   return (
     <>
       <Suspense fallback={<FullScreenLoading />}>
