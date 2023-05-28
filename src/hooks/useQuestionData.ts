@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IQuestion } from 'types/questionnaire';
 import { useQuiz } from '../context/QuizProviders';
 import { usePostAnswer } from '../services/AssignmentService';
 import { useNotification } from '../context/NotificationsProvider';
 
 export const useQuestionData = (question: IQuestion) => {
-
   const { createNotification } = useNotification();
   const { mutateAsync } = usePostAnswer();
   const { goToNextQuestion } = useQuiz();
@@ -14,6 +13,10 @@ export const useQuestionData = (question: IQuestion) => {
   const handleSelect = (option: number) => {
     setSelectedOption(option);
   };
+
+  useEffect(() => {
+    setSelectedOption(question?.response_id);
+  }, [ question ]);
 
   const handleSubmit = async (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();

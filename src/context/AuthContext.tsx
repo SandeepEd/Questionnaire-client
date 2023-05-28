@@ -26,11 +26,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const sessionPresent = getSession();
       if (!sessionPresent) {
         return null;
+        navigate(`/`);
       }
       const user = (await UserService.getUser()).data;
       setUser(user);
     };
     void getUserFromSession();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logIn = useCallback(async (creds: IUser) => {
@@ -41,13 +43,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setUser(user);
       }
       setIsLoading(false);
-      navigate(`/`);
+      navigate(`/questionnaire`);
     } catch (e: any) {
       setIsLoading(false);
       createNotification({
         message: e.response.data.message || e.message,
         type: `error`
       });
+      setUser(user);
+      navigate(`/`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
