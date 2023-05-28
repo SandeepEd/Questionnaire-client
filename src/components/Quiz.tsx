@@ -18,17 +18,19 @@ function Quiz() {
   }
 
   return (
-    <>
+    <div className='h-screen'>
       {user?.assignment_submitted ?
         <Summary />
         :
         <>
-          <Question
-            question={question}
-            callback={() => { }}
-            button_text={currentQuestionIndex === questions.length - 1 ? `Submit` :
-              user?.assignment_submitted ? `Next` : `Save Answer and Continue`}
-          />
+          <div className='h-4/5'>
+            <Question
+              question={question}
+              callback={() => { }}
+              button_text={currentQuestionIndex === questions.length - 1 ? `Submit` :
+                user?.assignment_submitted ? `Next` : `Save & Continue`}
+            />
+          </div>
           <Pagination
             totalCount={questions?.length || 0}
             currentPage={currentQuestionIndex}
@@ -36,7 +38,7 @@ function Quiz() {
           />
         </>
       }
-    </>
+    </div>
   );
 }
 
