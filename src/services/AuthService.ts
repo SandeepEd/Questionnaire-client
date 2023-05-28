@@ -1,17 +1,18 @@
 import cookie from 'cookie';
+import { AxiosResponse } from 'axios';
 import client from '../utils/http';
-import { IUser } from '../types/user';
+import { ILogin, IUser } from '../types/user';
 export class AuthService {
-  static login(data: IUser) {
+  static login(data: ILogin): Promise<AxiosResponse<IUser>> {
     return client.post(`/login`, data);
   }
 
-  static signUp(data: IUser) {
+  static signUp(data: ILogin) {
     return client.post(`/sign-up`, data);
   }
 }
 
-export const login = async (data: IUser): Promise<IUser> =>
+export const login = async (data: ILogin) =>
   await client.post(`/login`, data);
 
 export const getSession = () => {

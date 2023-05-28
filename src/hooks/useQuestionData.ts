@@ -7,7 +7,7 @@ import { useNotification } from '../context/NotificationsProvider';
 export const useQuestionData = (question: IQuestion) => {
   const { createNotification } = useNotification();
   const { mutateAsync } = usePostAnswer();
-  const { goToNextQuestion } = useQuiz();
+  const { goToNextQuestion, isLastQuestion } = useQuiz();
   const [ selectedOption, setSelectedOption ] = useState<number | null>(question?.response_id);
 
   const handleSelect = (option: number) => {
@@ -30,13 +30,14 @@ export const useQuestionData = (question: IQuestion) => {
     try {
       await mutateAsync({
         question_id: question?.id,
-        response_id: selectedOption
+        response_id: selectedOption,
+        is_submitting: isLastQuestion,
       });
       createNotification({
         message: `Answer saved successfully`,
         type: `success`
       });
-      goToNextQuestion();
+      !isLastQuestion && goToNextQuestion();
     } catch (e: any) {
       createNotification({
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access

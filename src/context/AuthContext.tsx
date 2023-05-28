@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { UserService } from '../services/UserService';
 import { getSession, login } from '../services/AuthService';
 import FullScreenLoading from '../components/FullScreenLoading';
-import { IUser } from '../types/user';
+import { ILogin, IUser } from '../types/user';
 import { useNotification } from './NotificationsProvider';
 
 interface IAuthContext {
   user: IUser | undefined;
-  logIn: (creds: IUser) => void;
+  logIn: (creds: ILogin) => void;
   logout: () => void;
 }
 const AuthContext = createContext<IAuthContext | null>(null);
@@ -25,8 +25,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const getUserFromSession = async () => {
       const sessionPresent = getSession();
       if (!sessionPresent) {
-        return null;
         navigate(`/`);
+        return null;
       }
       const user = (await UserService.getUser()).data;
       setUser(user);
@@ -35,10 +35,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const logIn = useCallback(async (creds: IUser) => {
+  const logIn = useCallback(async (creds: ILogin) => {
     try {
       setIsLoading(true);
-      const user = await login(creds);
+      const user = (await login(creds)).data;
       if (user) {
         setUser(user);
       }

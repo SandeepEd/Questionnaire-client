@@ -9,6 +9,7 @@ interface IQuizContext {
   goToNextQuestion: () => void;
   goToPreviousQuestion: () => void;
   goToQuestion: (questionIndex: number) => void;
+  isLastQuestion: boolean;
 }
 const QuizContext = createContext<IQuizContext | null>(null);
 
@@ -29,6 +30,8 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     setCurrentQuestionIndex(() => questionIndex);
   }
 
+  const isLastQuestion = currentQuestionIndex === (data?.length || 0) - 1;
+
   if (isLoading) {
     return <Loading />;
   }
@@ -42,7 +45,8 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     currentQuestionIndex,
     goToNextQuestion,
     goToPreviousQuestion,
-    goToQuestion
+    goToQuestion,
+    isLastQuestion
   }}>
     {children}
   </QuizContext.Provider>;

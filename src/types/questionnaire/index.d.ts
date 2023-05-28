@@ -8,6 +8,7 @@ export interface IQuestion {
   question_text: string;
   response_id: number | null;
   options: IOption[];
+  isCorrect?: boolean;
 }
 
 export interface IOption {
