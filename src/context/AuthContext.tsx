@@ -24,12 +24,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     const getUserFromSession = async () => {
       const sessionPresent = getSession();
-      if (!sessionPresent) {
-        navigate(`/`);
-        return null;
+      if (!sessionPresent || sessionPresent === `false`) {
+        return navigate(`/login`);
       }
       const user = (await UserService.getUser()).data;
       setUser(user);
+      navigate(`/questionnaire`);
     };
     void getUserFromSession();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,8 +50,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         message: e.response.data.message || e.message,
         type: `error`
       });
-      setUser(user);
-      navigate(`/`);
+      setUser(undefined);
+      navigate(`/login`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
