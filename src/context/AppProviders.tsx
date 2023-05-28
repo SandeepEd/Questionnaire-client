@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from '../containers/ErrorBoundary';
 import { AuthProvider } from './AuthContext';
 import { NotificationsProvider } from './NotificationsProvider';
-import { QuizProvider } from './QuizProviders';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,9 +28,7 @@ function AppProviders({ children }: { children: React.ReactNode }) {
         <BrowserRouter>
           <NotificationsProvider>
             <AuthProvider>
-              <QuizProvider>
-                {children}
-              </QuizProvider>
+              {children}
             </AuthProvider>
           </NotificationsProvider>
         </BrowserRouter>
